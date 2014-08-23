@@ -1,0 +1,34 @@
+ <?php
+
+ $title = 'My blog';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <p>
+     <a href="<?php echo $this->url('blog', array('action'=>'add'));?>">Add new post</a>
+ </p>
+
+ <table class="table">
+ <tr>
+     <th>Title</th>
+     <th>Author</th>
+     <th>&nbsp;</th>
+ </tr>
+ <?php if($posts) : foreach ($posts as $post) : ?>
+ <tr>
+     <td>
+         <a href="<?php echo $this->url('blog',
+             array('action'=>'show', 'id' => $post->id));?>">     
+             <?php echo $this->escapeHtml($post->title);?>
+         </a>     
+     </td>
+     <td><?php echo $this->escapeHtml($post->author);?></td>
+     <td>
+         <a href="<?php echo $this->url('blog',
+             array('action'=>'edit', 'id' => $post->id));?>">Edit</a>
+         <a href="<?php echo $this->url('blog',
+             array('action'=>'delete', 'id' => $post->id));?>">Delete</a>
+     </td>
+ </tr>
+ <?php endforeach; endif;?>
+ </table>
